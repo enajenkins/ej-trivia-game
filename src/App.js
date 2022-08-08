@@ -9,8 +9,8 @@ function App() {
 
       <main id="home" className="flex-center flex-column">
         <h1>Trivia Game</h1>
-        <a className="btn" href="/game.html">Play</a>
-        <a className="btn" href="/highscore.html">High Scores</a>
+        <a className="btn" href="/static-vanilla/game.html">Play</a>
+        <a className="btn" href="/static-vanilla/highscore.html">High Scores</a>
       </main>
 
       <footer></footer>
