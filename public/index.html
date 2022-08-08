@@ -1,14 +1,20 @@
 <!DOCTYPE html>
+<!-- the DOCTYPE declaration tells the browser what version of html the subsequesnt code is written in. Omitting this can cause the browser skip support for html5 specific tags like <header>, <footer>, <nav>, <section>, <article>, <aside>, etc -->
+
 <html lang="en">
+  <!-- the lang attribute in the html root element tag sets the language for the page. This is important for localization and for screenreaders to discern how to properly pronounce the content for improved accessibility.  -->
+
   <head>
-    <meta charset="utf-8" />
+    <!-- the head element contains non-displayed, machine readable information about the document. -->
+
+    <meta charset="UTF-8" />
+    <!-- UTF-8 ia a standard unicode-based character encoding that supports many languages. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- viewport tells the browser how to handle page dimensions and scaling. width=device-width renders the page width to the device's screen width. initial-scale=1.0 sets the initial zoom level when the page is first loaded by the browser. -->
+    <meta http-equiv="X-UA-Compatible" content="ie-edge" />
+    <!-- allows you to choose what version of IE the page will be renderd in -->
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Trivia Game App" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -24,7 +30,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>[Codename TBD] Trivia Game</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

@@ -210,19 +210,17 @@ and https://yalantis.com/blog/search-engine-optimization-for-react-apps/
 
 ## The Process Step-by-Step
 
-### Install the following
+### Install the following for React
 
 **create-react-app** | `npx create-react-app name-of-app-you-want-to-create`: CLI created to get a react scaffold up and runnning quickly. It installs `jest` for testing and `react-scripts` which carries various dependencies that are commonly used for react development. This tool renders your app on the client side this increases load time and prevents some web crawlers from indexing your site.
 
-**Read more here:**
-<https://blog.logrocket.com/improve-app-performance-react-server-side-rendering/>
-
-and
-
-<https://medium.com/eincode/next-js-vs-gatsby-js-frameworks-all-you-need-to-know-4147f36ed915>
-
 **react-router**
+
 **react-helmet**
+
+### Build the Vanilla JS Version First (my chosesn process for my own reasons)
+
+
 
 ## Resources
 
@@ -273,3 +271,7 @@ and
 <https://prismic.io/blog/compare-nextjs-vs-gatsby>
 
 <https://briananderson2209.medium.com/best-automation-testing-tools-for-2018-top-10-reviews-8a4a19f664d2>
+
+<https://blog.logrocket.com/improve-app-performance-react-server-side-rendering/>
+
+<https://medium.com/eincode/next-js-vs-gatsby-js-frameworks-all-you-need-to-know-4147f36ed915>
