@@ -17,8 +17,13 @@
 
       <div class="game-info">
         <div class="game-info-item">
-          <p class="game-info-label">Question: </p>
+          <!-- build a conditional in react that renders a manual progress bar for older browsers? -->
+          <!-- <p class="game-info-label">Question: </p>
           <p class="game-info-text" id="question-counter">1 of 5</p>
+          <div class="game-info-text" id="progress-bar"></div> -->
+
+          <label class="game-info-label" for="question-progress">Question: <span id="question-counter">1 of 5</span></label>
+          <progress class="game-info-text" id="question-progress" value="20" max="100"></progress>
         </div>
 
         <div class="game-info-item">

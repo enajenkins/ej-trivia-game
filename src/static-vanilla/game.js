@@ -91,6 +91,7 @@ let questions = [
   const question = document.getElementById('question');
   const questionCounter = document.getElementById('question-counter');
   const scoreText = document.getElementById('score');
+  const progressBar = document.getElementById('question-progress');
 
   // get the answer choice nodelist from the ui...
   // ...and to turn it into an array to perform actions on it
@@ -118,16 +119,23 @@ let questions = [
 
   const getNewQuestion = () => {
 
+    // update question count and progress bar when new question is loaded
+    // this needs to happen before the progress bar value is calculated
+    questionCount++;
+    questionCounter.innerText = `${questionCount} / ${MAX_QUESTIONS}`;
+
+    // calculate progress bar increments
+    // NOTE: for manual progress bar increment the width of the inner bar by the progressBarValue %
+    let progressBarValue = (questionCount / MAX_QUESTIONS) * 100;
+    progressBar.setAttribute('value', progressBarValue);
+
     // check if there are anymore questions left in the [availableQuestions] array which havent been asked 
     // OR if we have reached the maximum amount of questions allowed. 
     // if so, navigate to the given url or location
-    if ( availableQuestions.length === 0 || questionCount > MAX_QUESTIONS ) {
+    // NOTE: Fix extra question before redirect glitch
+    if ( questionCount > MAX_QUESTIONS || availableQuestions.length === 0 ) {
       return window.location.assign('/end.html');
     }
-
-    // update question count when new question is loaded
-    questionCount++;
-    questionCounter.innerText = `${questionCount} / ${MAX_QUESTIONS}`;
 
     // -- POPULATE THE QUESTION INTO THE UI --
     // return random index for the question set 
