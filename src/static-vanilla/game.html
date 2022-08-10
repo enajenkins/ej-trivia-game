@@ -5,29 +5,33 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game - Play</title>
-  <link rel="stylesheet" href="../index.css" />
+  <link rel="stylesheet" href="global.css" />
+  <link rel="stylesheet" href="game.css" />
 </head>
 <body>
   <div class="container">
     <div id="game" class="flex-center flex-column">
+      <p id="question-counter"></p>
       <h2 id="question">What is the answer to this Question?</h2>
       <div class="answer-container">
         <p class="answer-prefix">A</p>
-        <p class="answer-text">Answer 1</p>
+        <!-- when you create a custom data attribute, it becomes part of the dataset property colelction on the node in the DOM -->
+        <p class="answer-text" data-number="1">Answer 1</p> 
       </div>
       <div class="answer-container">
         <p class="answer-prefix">B</p>
-        <p class="answer-text">Answer 2</p>
+        <p class="answer-text" data-number="2">Answer 2</p>
       </div>
       <div class="answer-container">
         <p class="answer-prefix">C</p>
-        <p class="answer-text">Answer 3</p>
+        <p class="answer-text" data-number="3">Answer 3</p>
       </div>
       <div class="answer-container">
         <p class="answer-prefix">D</p>
-        <p class="answer-text">Answer 4</p>
+        <p class="answer-text" data-number="4">Answer 4</p>
       </div>
     </div>
   </div>
+  <script src="game.js"></script>
 </body>
 </html>

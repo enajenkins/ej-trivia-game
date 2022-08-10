@@ -1,0 +1,28 @@
+/* ----- GAME PLAY ------ **/
+
+.answer-container {
+  display: flex;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  font-size: 1.8rem;
+  border: 0.1rem solid darkgrey;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.answer-container:hover {
+  cursor: pointer;
+  box-shadow: .25rem .25rem .5rem 0 grey;
+  transform: translateY(-0.25rem);
+  transition: transform 150ms;
+}
+
+.answer-prefix {
+  padding: 1.5rem 2.5rem;
+  background-color: blue;
+  color: white;
+}
+
+.answer-text {
+  padding: 1.5rem;
+}
