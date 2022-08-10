@@ -66,6 +66,7 @@ h3 {
   /* constrain the maximum container width for larger screens but keep it centered */
   max-width: 120rem;
   margin: 0 auto;
+  padding: 2rem;
 }
 
 /* continue to horozontally center all child elements */
