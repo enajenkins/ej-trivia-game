@@ -77,7 +77,7 @@ let questions = [
 /* --- INITIAL SETTINGS AND STORE UI ELEMENTS --------- */
 
   // initialize settings we'll need to start the game
-  const CORRECT_BONUS = 10;
+  const CORRECT_SCORE_POINTS = 10;
   const MAX_QUESTIONS = 3;
 
   let availableQuestions = [];
@@ -87,9 +87,10 @@ let questions = [
   let questionCount = 0;
   let score = 0;
 
-  // get question element and counter from the ui
+  // get question element, counter and score from the ui
   const question = document.getElementById('question');
   const questionCounter = document.getElementById('question-counter');
+  const scoreText = document.getElementById('score');
 
   // get the answer choice nodelist from the ui...
   // ...and to turn it into an array to perform actions on it
@@ -126,6 +127,7 @@ let questions = [
 
     // update question count when new question is loaded
     questionCount++;
+    questionCounter.innerText = `${questionCount} / ${MAX_QUESTIONS}`;
 
     // -- POPULATE THE QUESTION INTO THE UI --
     // return random index for the question set 
@@ -150,6 +152,7 @@ let questions = [
       currentContainer.innerText = currentQuestion.answer_choices[ currentIndex ]; 
 
       // set the correct answer for the current question
+      // NOTE: still need to allow for multiple correct answers
       correctAnswer = currentQuestion.correct_answer.toString();
     });
 
@@ -162,7 +165,16 @@ let questions = [
   }
 
 
-  /* --- LISTENERS FOR UI USER ACTIONS --------- */
+/* --- UPDATE SCORE --------- */
+  // pass a number in when the function is called and add it to the current score
+  // ...then write it to the ui
+  const updateScore = num => {
+    score += num;
+    scoreText.innerText = score;
+  }
+
+
+/* --- LISTENERS FOR UI USER ACTIONS --------- */
 
   // add a click event listener to each answer element in the ui so we can identify which answer the user selects and check if it's correct
   answerChoiceContainer.forEach( answer => {
@@ -172,12 +184,32 @@ let questions = [
       if (!isAcceptingAnswers) return;
 
       isAcceptingAnswers = false;
-      const answerSelectedByUser = e.target.innerText;
-      // const correct_answer == answerSelectedByUser.innerText
-      console.log(answerSelectedByUser);
+      const answerSelectedByUser = e.target;
+      const answerSelectedByUserText = answerSelectedByUser.innerText;
 
-      // load new question
-      getNewQuestion();
+      // set up correct vs incorrect selection logic for styling
+      // const correctOrIncorrectClass = answerSelectedByUserText === correctAnswer ? "correct" : "incorrect";
+      let correctOrIncorrectClass = "incorrect";
+      if ( answerSelectedByUserText === correctAnswer ) {
+        correctOrIncorrectClass = "correct";
+      }
+
+      // if the user selects the correct answer, update the score
+      if ( correctOrIncorrectClass === "correct" ) {
+        updateScore(CORRECT_SCORE_POINTS);
+      }
+
+      // apply the highlight class to the parent of the user selected answer 
+      answerSelectedByUser.parentElement.classList.add(correctOrIncorrectClass);
+
+      // remove the class after 1 second so highlight can register - then load a new question
+      setTimeout(() => {
+        answerSelectedByUser.parentElement.classList.remove(correctOrIncorrectClass);
+        // load new question
+        getNewQuestion();        
+      }, 1000);
+
+
     } );
   });
 

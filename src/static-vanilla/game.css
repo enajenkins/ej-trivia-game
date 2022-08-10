@@ -27,3 +27,41 @@
   padding: 1.5rem;
   width: 100%;
 }
+
+.correct {
+  background-color: lightgreen;
+}
+
+.incorrect {
+  background-color: pink;
+}
+
+/* ----- GAME STATS AND INFO DISPLAY ------ **/
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.game-info-item {
+
+}
+
+.game-info-label {
+ text-align: center;
+ font-size: 2rem;
+}
+      
+.game-info-text {
+  text-align: center;
+  font-size: 4rem;
+}
+
+#question-counter {
+
+}
+
+#score {
+
+}

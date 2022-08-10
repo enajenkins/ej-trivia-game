@@ -9,10 +9,26 @@
   <link rel="stylesheet" href="game.css" />
 </head>
 <body>
+
   <div class="container">
     <div id="game" class="flex-center flex-column">
-      <p id="question-counter"></p>
+
+      <h1>[Code Name] Trivia Game</h1>
+
+      <div class="game-info">
+        <div class="game-info-item">
+          <p class="game-info-label">Question: </p>
+          <p class="game-info-text" id="question-counter">1 of 5</p>
+        </div>
+
+        <div class="game-info-item">
+          <p class="game-info-label">Score: </p>
+          <p class="game-info-text" id="score">0</p>
+        </div>
+      </div>   
+
       <h2 id="question">What is the answer to this Question?</h2>
+
       <div class="answer-container">
         <p class="answer-prefix">A</p>
         <!-- when you create a custom data attribute, it becomes part of the dataset property colelction on the node in the DOM -->
@@ -30,6 +46,8 @@
         <p class="answer-prefix">D</p>
         <p class="answer-text" data-number="4">Answer 4</p>
       </div>
+
+
     </div>
   </div>
   <script src="game.js"></script>
