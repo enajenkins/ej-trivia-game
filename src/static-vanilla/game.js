@@ -134,7 +134,9 @@ let questions = [
     // if so, navigate to the given url or location
     // NOTE: Fix extra question before redirect glitch
     if ( questionCount > MAX_QUESTIONS || availableQuestions.length === 0 ) {
-      return window.location.assign('/end.html');
+      // store the player score in local storage so we can access it from the score screen. Save the score into the value 'mostRecentScore'
+      localStorage.setItem('mostRecentScore', score);
+      return window.location.assign('scores.html');
     }
 
     // -- POPULATE THE QUESTION INTO THE UI --
