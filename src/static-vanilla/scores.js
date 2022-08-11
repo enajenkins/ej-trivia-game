@@ -13,7 +13,6 @@
   // you can convert an array to json with JSON.stringify([])
   // you can convert json coming from localStorage to an array with JSON.parse() 
   const highScores = JSON.parse(localStorage.getItem('highScores')) || []; // or initialize an empty high scores array if this is the first time
-  console.log(highScores);
 
   // update the score display in the ui
   finalScore.innerText = mostRecentScore;
@@ -66,7 +65,5 @@
 
     // go back to homepage once we save our score
     window.location.assign('home.html');
-
-    // console.log(highScores);
   };
 

@@ -74,6 +74,30 @@ let questions = [
 ];
 
 
+// (moved to external questions.json file so we can access it via fetch API)
+// let questions = [];
+
+// fetch() returns a promise so you can chain handler methods
+fetch('questions.json')
+  .then( res => {
+    console.log(res);
+    // get a json version of the data from the http response data object
+    return res.json();
+  })
+  .then(loadedQuestions => {
+    console.log("loadedQuestions: ", loadedQuestions);
+    // load the (now json formatted) questions from the http response object fetched from the remote location into the [questions] object we are using throughout the app
+    questions = loadedQuestions;
+
+    // wait to start the game until after you load the questions
+    startGame();
+  })
+  .catch( err => {
+    console.error(err);
+  })
+  ;
+
+
 /* --- INITIAL SETTINGS AND STORE UI ELEMENTS --------- */
 
   // initialize settings we'll need to start the game
