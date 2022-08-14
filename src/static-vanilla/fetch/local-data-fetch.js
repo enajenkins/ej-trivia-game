@@ -21,47 +21,22 @@ let questions = [];
 
 // initialize settings we'll need to start the game
 const CORRECT_SCORE_POINTS = 10;
-const MAX_QUESTIONS = 10;
+const MAX_QUESTIONS = 3;
 
 
 // fetch() returns a promise so you can chain handler methods
-fetch('https://opentdb.com/api.php?amount=50&category=9&difficulty=easy&type=multiple')
+fetch('questions.json')
   .then( res => {
+    // console.log("res: ", res);
     // get the body of the http response object and convert it to json 
     return res.json();
   })
   .then(loadedQuestions => {
-    // get each individual question / answer dataset
-    questions = loadedQuestions.results.map( loadedQuestion => {
-      // convert the mapped question into the format you need - an object
-      const formattedQuestion = {
-        question: loadedQuestion.question
-      };
+    // set the questions data set array we are using to extract questions and answers to the data set array we just fetched and converted
+    questions = loadedQuestions;
+    // console.log("questions: ", questions);
 
-      // console.log("loadedQuestions: ", loadedQuestions);
-      // console.log("formattedQuestion: ", formattedQuestion);
-
-      /* --- Combine all availble answers (total 4) and randomize order ------ */
-
-      // copy the 3 incorrect answer choices into a new array with the spread operator
-      const answerChoices = [...loadedQuestion.incorrect_answers];
-
-      // randomize an index between 0 and 3 to get splice start position for correct answer insertion
-      formattedQuestion.answer = Math.floor(Math.random() * 3) + 1;
-
-      // splice in the index position minus 1 to account for 0-based index, don't remove any items, insert correct answer 
-      answerChoices.splice(
-        formattedQuestion.answer -1, 0, loadedQuestion.correct_answer
-      );
-
-      // iterate though the new combined answers array, grab a reference to each choice and it's index
-      answerChoices.forEach((choice, index) => {
-        formattedQuestion[index] = choice; // make sure correct answer maps to index - 1
-        // formattedQuestion[index] = choice;
-        // formattedQuestion['answer_choice' + (index +1)] = choice;
-      });
-      return formattedQuestion;
-    });
+    // wait to start the game until after you load the questions
     startGame();
   })
   .catch( err => {
@@ -71,7 +46,9 @@ fetch('https://opentdb.com/api.php?amount=50&category=9&difficulty=easy&type=mul
 
 /* --- START GAMEPLAY FUNCTION --------- */
 
-  const startGame = () => {  
+  const startGame = () => {
+    // console.log("questions - startGame(): ", questions);
+
     // reset score and question counter to 0 when a new game begins
     score = 0;
     questionCount = 0;
@@ -88,6 +65,7 @@ fetch('https://opentdb.com/api.php?amount=50&category=9&difficulty=easy&type=mul
 /* --- QUESTIONS AND ANSWERS --------- */
 
   const getNewQuestion = () => {
+
     // check if there are anymore questions left in the [availableQuestions] array which havent been asked 
     // OR if we have reached the maximum amount of questions allowed. 
     // if so, navigate to the given url or location
@@ -125,12 +103,13 @@ fetch('https://opentdb.com/api.php?amount=50&category=9&difficulty=easy&type=mul
     // ...so it can be used to map the answers to the container innerText
     // ENHANCEMENT: eventually in React I may want to modify this to first check for the number of answers, then render that number of answer container elements into the ui - THEN perform this action.
     answerChoiceContainer.forEach(( currentContainer, currentIndex ) => {
+
       // while looping through each answerChoiceContainer ui element, replace the current container's innerText with an answer from the json's answer_choices array that matches the current container's index
-      currentContainer.innerText = currentQuestion[currentIndex]; // fills in answers but not correctly
+      currentContainer.innerText = currentQuestion.answer_choices[ currentIndex ]; 
 
       // set the correct answer for the current question
       // NOTE: still need to allow for multiple correct answers
-      correctAnswer = currentQuestion.answer.toString();
+      correctAnswer = currentQuestion.correct_answer.toString();
     });
 
     // remove the question we just used from the array so we don't duplicate questions during the quiz
@@ -156,17 +135,18 @@ fetch('https://opentdb.com/api.php?amount=50&category=9&difficulty=easy&type=mul
   // add a click event listener to each answer element in the ui so we can identify which answer the user selects and check if it's correct
   answerChoiceContainer.forEach( answer => {
     answer.addEventListener( 'click', e => {
-      correctAnswer = currentQuestion.answer.toString();
 
       // ignore click if question is not loaded yet - adds a very slight delay 
       if (!isAcceptingAnswers) return;
 
       isAcceptingAnswers = false;
       const answerSelectedByUser = e.target;
+      const answerSelectedByUserText = answerSelectedByUser.innerText;
 
       // set up correct vs incorrect selection logic for styling
-      let correctOrIncorrectClass = "incorrect"; 
-      if ( answerSelectedByUser.getAttribute('data-number') === correctAnswer ) {
+      // const correctOrIncorrectClass = answerSelectedByUserText === correctAnswer ? "correct" : "incorrect";
+      let correctOrIncorrectClass = "incorrect";
+      if ( answerSelectedByUserText === correctAnswer ) {
         correctOrIncorrectClass = "correct";
       }
 
@@ -184,6 +164,8 @@ fetch('https://opentdb.com/api.php?amount=50&category=9&difficulty=easy&type=mul
         // load new question
         getNewQuestion();        
       }, 1000);
+
+
     } );
   });
 

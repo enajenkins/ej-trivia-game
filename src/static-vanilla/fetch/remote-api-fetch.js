@@ -21,7 +21,7 @@ let questions = [];
 
 // initialize settings we'll need to start the game
 const CORRECT_SCORE_POINTS = 10;
-const MAX_QUESTIONS = 10;
+const MAX_QUESTIONS = 3;
 
 
 // fetch() returns a promise so you can chain handler methods

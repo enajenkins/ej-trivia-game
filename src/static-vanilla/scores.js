@@ -30,14 +30,14 @@
 
 /* --- SCORE FUNCTIONS --------- */
 
-  const saveHighScore = (e) => {
+const saveHighScore = (e) => {
 
     e.preventDefault(); // prevents form from submitting to a different page 
 
     // create a score object that will reference the most recent user info so we can add it to the high scores array
     const score = {
-      score: Math.floor(Math.random() * 100), // test score sorting with random numbers
-      // score: mostRecentScore,
+      // score: Math.floor(Math.random() * 100), // test score sorting with random numbers
+      score: mostRecentScore,
       name: username.value
     };
 
