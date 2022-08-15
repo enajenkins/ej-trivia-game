@@ -12,6 +12,8 @@ const questionElement = document.getElementById('question');
 const questionCounter = document.getElementById('question-counter');
 const scoreText = document.getElementById('score');
 const progressBar = document.getElementById('question-progress');
+const loader = document.getElementById('loader');
+const game = document.getElementById('game');
 
 // get the answer choice nodelist from the ui...
 // ...and to turn it into an array to perform actions on it
@@ -62,6 +64,7 @@ fetch('https://opentdb.com/api.php?amount=50&category=9&difficulty=easy&type=mul
       });
       return formattedQuestion;
     });
+
     startGame();
   })
   .catch( err => {
@@ -80,8 +83,13 @@ fetch('https://opentdb.com/api.php?amount=50&category=9&difficulty=easy&type=mul
     // this will return a full copy of the questions array and will avoid effecting the original array.
     // you can also spread and combine additional arrays into one large one later if desired.
     availableQuestions = [ ...questions ]; 
+
     // load new question
     getNewQuestion();
+
+    // you now have the question added and displayed on the screen so show the game and hide the loader - then start the game
+    game.classList.remove("hidden");
+    loader.classList.add("hidden");
   }
 
 
