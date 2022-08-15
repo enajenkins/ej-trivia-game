@@ -208,7 +208,7 @@ and https://yalantis.com/blog/search-engine-optimization-for-react-apps/
 
 -------------------------------------------------
 
-## The Process Step-by-Step
+## The Process Step-by-Step (WIP)
 
 ### Install the following for React
 
